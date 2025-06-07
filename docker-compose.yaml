@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  tailscale:
+    image: tailscale/tailscale
+    container_name: tailscale
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    network_mode: "host"
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+      - ./tailscale:/var/lib/tailscale
+    env_file:
+      - .env
+    restart: unless-stopped
+    command: tailscaled
+
+  rustdesk-hbbs:
+    image: rustdesk/rustdesk-server:latest
+    container_name: hbbs
+    ports:
+      - "21115:21115"
+      - "21116:21116"
+      - "21118:21118"
+    command: hbbs -r 0.0.0.0:21117
+    restart: unless-stopped
+
+  rustdesk-hbbr:
+    image: rustdesk/rustdesk-server:latest
+    container_name: hbbr
+    ports:
+      - "21117:21117"
+    command: hbbr
+    restart: unless-stopped

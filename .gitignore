@@ -1,0 +1,25 @@
+# Ignore Docker volumes and environment files
+/tailscale/*
+!/tailscale/.gitkeep
+.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore logs
+*.log
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore OS generated files
+*.swp
+*.swo
+
+# Ignore Python cache (if any)
+__pycache__/
+*.pyc
+
+# Ignore node_modules (if any)
+node_modules/
