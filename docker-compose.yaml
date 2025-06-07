@@ -26,6 +26,8 @@ services:
       - "21116:21116"
       - "21118:21118"
     command: hbbs -r 0.0.0.0:21117
+    depends_on:
+      - tailscale
     restart: unless-stopped
 
   rustdesk-hbbr:
@@ -35,4 +37,6 @@ services:
     ports:
       - "21117:21117"
     command: hbbr
+    depends_on:
+      - tailscale
     restart: unless-stopped
