@@ -21,10 +21,14 @@ services:
     image: rustdesk/rustdesk-server:latest
     container_name: hbbs
     network_mode: service:tailscale
-    ports:
-      - "21115:21115"
-      - "21116:21116"
-      - "21118:21118"
+    expose:
+      - 21115
+      - 21116
+      - 21118
+    # ports:
+    #   - "21115:21115"
+    #   - "21116:21116"
+    #   - "21118:21118"
     command: hbbs -r 0.0.0.0:21117
     depends_on:
       - tailscale
@@ -34,8 +38,10 @@ services:
     image: rustdesk/rustdesk-server:latest
     container_name: hbbr
     network_mode: service:tailscale
-    ports:
-      - "21117:21117"
+    expose:
+      - 21117
+    # ports:
+    #   - "21117:21117"
     command: hbbr
     depends_on:
       - tailscale
